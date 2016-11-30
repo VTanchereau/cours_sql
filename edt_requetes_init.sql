@@ -1,6 +1,6 @@
 CREATE TABLE Eleve (
-	nom		VARCHAR(20), -- primaty key
-	prenom	VARCHAR(20), -- primaty key
+	nom		VARCHAR(20),
+	prenom	VARCHAR(20),
 	mail	VARCHAR(50)	-- primaty key
 );
 
@@ -14,19 +14,19 @@ CREATE TABLE Promotion (
 
 
 CREATE TABLE Formateur (
-	nom			VARCHAR(20), -- primaty key
-	prenom		VARCHAR(20), -- primaty key
+	nom			VARCHAR(20),
+	prenom		VARCHAR(20),
 	mail		VARCHAR(50), -- primaty key
 	telephone	VARCHAR(16)
 );
 
 CREATE TABLE Formation (
-	nom				VARCHAR(20), -- primaty key
+	nom				VARCHAR(20), -- primaty key (a valider par le client)
 	nbHeuresTotal	FLOAT
 );
 
 CREATE TABLE Salle (
-	nom			VARCHAR(20), -- primaty key
+	nom			VARCHAR(20), -- primaty key (a valider par le client)
 	capacite	INTEGER
 );
 
