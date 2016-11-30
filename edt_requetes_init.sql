@@ -61,14 +61,6 @@ CREATE TABLE Salle (
 		PRIMARY KEY(id_salle)
 );
 
-CREATE TABLE EmploiDuTemps (
-	id_edt			INTEGER NOT NULL IDENTITY(1,1),
-	dateDebut_edt	DATETIME NOT NULL,
-	dateFin_edt		DATETIME NOT NULL,
-	CONSTRAINT pk_edt
-		PRIMARY KEY(id_edt)
-);
-
 CREATE TABLE Session_edt (
 	id_session			INTEGER NOT NULL IDENTITY(1,1),
 	id_promotion		INTEGER NOT NULL,
@@ -117,19 +109,6 @@ CREATE TABLE Formateur_matiere (
 	CONSTRAINT fk_matiere_FormateurMatiere
 		FOREIGN KEY (id_matiere)
 		REFERENCES Matiere(id_matiere)
-);
-
-CREATE TABLE Session_EmploiDuTemps (
-	id_session INTEGER NOT NULL,
-	id_edt INTEGER NOT NULL,
-	CONSTRAINT pk_session_EDT
-		PRIMARY KEY (id_session, id_edt),
-	CONSTRAINT fk_session_SessionEdt
-		FOREIGN KEY (id_session)
-		REFERENCES Session_edt(id_session),
-	CONSTRAINT fk_edt_SessionEdt
-		FOREIGN KEY (id_edt)
-		REFERENCES EmploiDuTemps(id_edt)
 );
 
 CREATE TABLE Absence (
