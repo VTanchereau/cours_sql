@@ -16,7 +16,9 @@ ALTER TABLE Produit ADD id INTEGER NOT NULL IDENTITY(1,1);
 ALTER TABLE Produit 
 	ADD CONSTRAINT produit_pk
 	PRIMARY KEY (id);
+
+ALTER TABLE Produit ADD id_categorie INTEGER NOT NULL;
 ALTER TABLE Produit 
 	ADD CONSTRAINT produit_fk
-	FOREIGN KEY (id)
+	FOREIGN KEY (id_categorie)
 	REFERENCES Categorie (id);
