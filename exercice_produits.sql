@@ -1,24 +1,14 @@
 CREATE TABLE Categorie(
-	libelle VARCHAR (25)
+	id INTEGER NOT NULL PRIMARY KEY,
+	libelle VARCHAR (50)
 );
 
 CREATE TABLE Produit (
-	nom VARCHAR (25),
-	code CHAR(5)
+	id INTEGER NOT NULL PRIMARY KEY,
+	code CHAR(5) UNIQUE,
+	nom VARCHAR (50),
+	categorie_id INTEGER,
+	CONSTRAINT fk_produit_categorie
+		FOREIGN KEY (categorie_id)
+		REFERENCES categorie (id)
 );
-
-ALTER TABLE Categorie ADD id INTEGER NOT NULL IDENTITY(1,1);
-ALTER TABLE Categorie 
-	ADD CONSTRAINT categorie_pk
-	PRIMARY KEY (id);
-
-ALTER TABLE Produit ADD id INTEGER NOT NULL IDENTITY(1,1);
-ALTER TABLE Produit 
-	ADD CONSTRAINT produit_pk
-	PRIMARY KEY (id);
-
-ALTER TABLE Produit ADD id_categorie INTEGER;
-ALTER TABLE Produit 
-	ADD CONSTRAINT categorie_fk
-	FOREIGN KEY (id_categorie)
-	REFERENCES Categorie (id);
