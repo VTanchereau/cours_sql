@@ -40,7 +40,7 @@ CREATE TABLE Commande (
 CREATE TABLE Ligne_commande (
 	Commande_id INTEGER NOT NULL,
 	Produit_id INTEGER NOT NULL,
-	Quantite INTEGER DEFAULT 1,
+	Quantite INTEGER NOT NULL,
 	CONSTRAINT pk_ligne_commande
 		PRIMARY KEY (Commande_id, Produit_id),
 	CONSTRAINT fk_commande_Ligne_commande

@@ -1,40 +1,90 @@
-
+USE COUCOU;
+GO
 
 SET IDENTITY_INSERT Categorie ON
-INSERT INTO Categorie (id, libelle) VALUES 
-	(1,'Fruits et légumes'),
-	(2, 'Informatique'),
-	(3, 'Electroménagé');
-
+INSERT INTO Categorie (Id, Libelle) VALUES 
+(1,'Fruits et légumes'),
+(2, 'Informatique'),
+(3, 'Electroménagé');
 SET IDENTITY_INSERT Categorie OFF
 
-INSERT INTO Produit (code, nom, categorie_id) VALUES 
-	('FL001', 'Tomates', (SELECT id FROM Categorie WHERE libelle = 'Fruits et légumes')),
-	('FL002', 'Concombre', (SELECT id FROM Categorie WHERE libelle = 'Fruits et légumes')),
-	('FL003', 'Radis', (SELECT id FROM Categorie WHERE libelle = 'Fruits et légumes')),
-	('FL004', 'Pommes de Terre', (SELECT id FROM Categorie WHERE libelle = 'Fruits et légumes')),
-	('FL005', 'Courgette', (SELECT id FROM Categorie WHERE libelle = 'Fruits et légumes')),
-	('FL006', 'Poivron', (SELECT id FROM Categorie WHERE libelle = 'Fruits et légumes')),
+SET IDENTITY_INSERT Produit ON
+INSERT INTO Produit (Id, Code, Nom, Categorie_id) VALUES 
+(1, 'FL001', 'Tomates', 1),
+(2, 'FL002', 'Concombre', 1),
+(3, 'FL003', 'Radis',1),
+(4, 'FL004', 'Pommes de Terre', 1),
+(5, 'FL005', 'Courgette', 1),
+(6, 'FL006', 'Poivron', 1),
 
-	('INF01', 'ASUS RoG', (SELECT id FROM Categorie WHERE libelle = 'Informatique')),
-	('INF02', 'Medion Erazer', (SELECT id FROM Categorie WHERE libelle = 'Informatique')),
-	('INF03', 'HP Spectre', (SELECT id FROM Categorie WHERE libelle = 'Informatique')),
-	('INF04', 'Macbook pro', (SELECT id FROM Categorie WHERE libelle = 'Informatique')),
-	('INF05', 'Macbook air', (SELECT id FROM Categorie WHERE libelle = 'Informatique')),
-	('INF06', 'iPad', (SELECT id FROM Categorie WHERE libelle = 'Informatique')),
+(7, 'INF01', 'ASUS RoG', 2),
+(8, 'INF02', 'Medion Erazer', 2),
+(9, 'INF03', 'HP Spectre', 2),
+(10, 'INF04', 'Macbook pro', 2),
+(11, 'INF05', 'Macbook air', 2),
+(12, 'INF06', 'iPad', 2),
 	
-	('EL001', 'Four Siemens', (SELECT id FROM Categorie WHERE libelle = 'Electroménagé')),
-	('EL002', 'Four Bosch', (SELECT id FROM Categorie WHERE libelle = 'Electroménagé')),
-	('EL003', 'Sèche-linge Samsung', (SELECT id FROM Categorie WHERE libelle = 'Electroménagé')),
-	('EL004', 'Sèche-linge Electrolux', (SELECT id FROM Categorie WHERE libelle = 'Electroménagé')),
-	('EL005', 'Machine à laver Samsung', (SELECT id FROM Categorie WHERE libelle = 'Electroménagé')),
-	('EL006', 'Machine à laver Bosch', (SELECT id FROM Categorie WHERE libelle = 'Electroménagé'));
+(13, 'EL001', 'Four Siemens', 3),
+(14, 'EL002', 'Four Bosch', 3),
+(15, 'EL003', 'Sèche-linge Samsung', 3),
+(16, 'EL004', 'Sèche-linge Electrolux', 3),
+(17, 'EL005', 'Machine à laver Samsung', 3),
+(18, 'EL006', 'Machine à laver Bosch', 3);
+SET IDENTITY_INSERT Produit OFF
 
-SELECT 
-	CONCAT (p.categorie_id, ' - ', cat.libelle) AS 'Catégorie',
-	CONCAT (nom, ' (', code, ')') AS 'Produit'
-FROM Categorie cat INNER JOIN Produit p
-ON p.categorie_id = cat.id
-ORDER BY cat.libelle;
+SET IDENTITY_INSERT Client ON
+INSERT INTO Client (Id, Nom, Prenom, Mail) VALUES
+(1, 'Tanchereau', 'Victor', 'unmail-1@gmail.com'),
+(2, 'Laplaud', 'Clément', 'unmail-2@gmail.com'),
+(3, 'Sejourne', 'Thibault', 'unmail-3@gmail.com'),
+(4, 'Crossouard', 'Rémi', 'unmail-4@gmail.com'),
+(5, 'Poireau', 'Marie', 'unmail-5@gmail.com'),
+(6, 'Chazarain', 'Camille', 'unmail-6@gmail.com');
+SET IDENTITY_INSERT Client OFF
 
---SELECT id AS 'Numéro', code AS 'Code Prouit', categorie_id AS 'Numéro de Catégorie' FROM Produit WHERE categorie_id IN (SELECT id FROM Categorie WHERE libelle = 'Sites de bool');
+SET IDENTITY_INSERT Commande ON
+INSERT INTO Commande (Id, Adresse, Client_id) VALUES
+(1, 'Adresse de Victor', 1),
+(2, 'Adresse de Clément', 2),
+(3, 'Adresse de Thibault', 3),
+(4, 'Adresse de Rémi', 4),
+(5, 'Adresse de Marie', 5),
+(6, 'Adresse de Camille', 6);
+SET IDENTITY_INSERT Commande OFF
+
+INSERT INTO Ligne_commande (Commande_id, Produit_id, Quantite) VALUES
+(1, 8, 1),
+(1, 9, 1),
+(1, 10, 3),
+(1, 14, 1),
+(1, 6, 12),
+
+(2, 18, 1),
+(2, 4, 6),
+(2, 1, 13),
+(2, 15, 1),
+(2, 13, 2),
+
+(3, 9, 1),
+(3, 5, 2),
+(3, 16, 3),
+(3, 11, 1),
+(3, 7, 5),
+
+(4, 4, 4),
+(4, 2, 15),
+(4, 17, 3),
+(4, 12, 3),
+(4, 8, 2),
+
+(5, 8, 6),
+(5, 9, 1),
+(5, 10, 4),
+(5, 14, 15),
+(5, 6, 2),
+
+(6, 18, 1),
+(6, 17, 1),
+(6, 16, 1),
+(6, 15, 1),
+(6, 14, 2);

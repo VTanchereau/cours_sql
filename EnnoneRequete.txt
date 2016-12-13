@@ -1,0 +1,27 @@
+Ecrire une requete affichant la liste des produits commandés en indiquant pour chacun :
+	- le numéro de la commande
+	- le nom complet du client
+	- l'adresse de livraison
+	- le produit commandé (les informations suivantes devront être affichées : catégorie, nom et code.)
+	- la quantité commandée
+Les commandes complètes devront être identifiables rapidement dans la liste des résultats.
+
+______________________________________________________________________________________________________________________________
+
+Ecrire une requete affichant la liste des produits commandés en indiquant pour chacun :
+	- le numéro de la commande
+	- le nom complet du client
+	- l'adresse de livraison
+	- le produit commandé (les informations suivantes devront être affichées : catégorie, nom et code.)
+	- la quantité commandée
+Les commandes complètes devront être identifiables rapidement dans la liste des résultats.
+
+Affichée uniquement les commandes contenant une quantités totale d'articles commandés dans un interval donné (exemple : entre 5 et 10)
+
+______________________________________________________________________________________________________________________________
+
+Afficher la liste des commandes en indiquant pour chacune : 
+	- le numéro de la commande
+	- le nom complet du client
+	- l'adresse de livraison
+	- la quantité de produits commandés
