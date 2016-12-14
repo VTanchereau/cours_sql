@@ -25,3 +25,10 @@ Afficher la liste des commandes en indiquant pour chacune :
 	- le nom complet du client
 	- l'adresse de livraison
 	- la quantité de produits commandés
+
+______________________________________________________________________________________________________________________________
+
+Liste de tous les produits qui ont été commandé en plus 10 exemplaire sur une seule commande.
+
+
+Récup les nom des gens qui ont commandé plus de 10 fois un produit dans une commande 

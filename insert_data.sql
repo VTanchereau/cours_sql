@@ -50,6 +50,7 @@ INSERT INTO Commande (Id, Adresse, Client_id) VALUES
 (4, 'Adresse de Rémi', 4),
 (5, 'Adresse de Marie', 5),
 (6, 'Adresse de Camille', 6);
+
 SET IDENTITY_INSERT Commande OFF
 
 INSERT INTO Ligne_commande (Commande_id, Produit_id, Quantite) VALUES
@@ -88,3 +89,23 @@ INSERT INTO Ligne_commande (Commande_id, Produit_id, Quantite) VALUES
 (6, 16, 1),
 (6, 15, 1),
 (6, 14, 2);
+
+SET IDENTITY_INSERT Commande ON
+INSERT INTO Commande (Id, Adresse, Client_id) VALUES
+(7, 'Adresse de Victor', 3),
+(8, 'Adresse de Victor', 3);
+SET IDENTITY_INSERT Commande OFF
+
+
+INSERT INTO Ligne_commande (Commande_id, Produit_id, Quantite) VALUES
+(7, 8, 1),
+(7, 9, 1),
+(7, 10, 3),
+(7, 14, 8),
+(7, 7, 8),
+
+(8, 8, 1),
+(8, 9, 1),
+(8, 10, 3),
+(8, 14, 3),
+(8, 7, 5);

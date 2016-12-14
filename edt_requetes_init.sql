@@ -1,125 +1,125 @@
-USE edt 
-
+USE edt;
+GO
 CREATE TABLE Formation (
-	id_formation			INTEGER NOT NULL IDENTITY(1,1),
-	nom_formation			VARCHAR(100) NOT NULL UNIQUE, -- primaty key (a valider par le client)
-	nbHeuresTotal_formation	FLOAT,
+	Id INTEGER NOT NULL IDENTITY(1,1),
+	Nom VARCHAR(100) NOT NULL UNIQUE, -- primaty key (a valider par le client)
+	NbHeuresTotal FLOAT,
 	CONSTRAINT pk_formation
-		PRIMARY KEY(id_formation)
+		PRIMARY KEY(Id)
 );
 
 CREATE TABLE Promotion (
 	-- Ici la primary key est le nom si le nom de la promotion est obligatoire et unique
 	-- sinon il faut un ID
-	id_promotion		INTEGER NOT NULL IDENTITY(1,1),
-	id_formation		INTEGER NOT NULL ,
-	nom_promotion		VARCHAR(50) NOT NULL,
-	dateDebut_promotion	DATETIME NOT NULL,
-	dateFin_promotion	DATETIME NOT NULL,
-	CONSTRAINT fk_formation_promotion
-		FOREIGN KEY (id_formation)
-		REFERENCES Formation(id_formation),
+	Id INTEGER NOT NULL IDENTITY(1,1),
+	Formation_id INTEGER NOT NULL ,
+	Nom VARCHAR(50) NOT NULL,
+	DateDebut DATETIME NOT NULL,
+	DateFin	DATETIME NOT NULL,
 	CONSTRAINT pk_promotion
-		PRIMARY KEY(id_promotion)
+		PRIMARY KEY(Id),
+	CONSTRAINT fk_formation_promotion
+		FOREIGN KEY (Formation_id)
+		REFERENCES Formation(Id)
 );
 
 CREATE TABLE Eleve (
-	id_eleve		INTEGER NOT NULL IDENTITY(1,1),
-	id_promotion	INTEGER NOT NULL,
-	nom_eleve		VARCHAR(20) NOT NULL,
-	prenom_eleve	VARCHAR(20) NOT NULL,
-	mail_eleve		VARCHAR(50) NOT NULL UNIQUE,
-	CONSTRAINT fk_promotion_eleve
-		FOREIGN KEY (id_promotion)
-		REFERENCES Promotion(id_promotion),
+	Id INTEGER NOT NULL IDENTITY(1,1),
+	Promotion_id INTEGER NOT NULL,
+	Nom	VARCHAR(20) NOT NULL,
+	Prenom VARCHAR(20) NOT NULL,
+	Mail VARCHAR(50) NOT NULL UNIQUE,
 	CONSTRAINT pk_eleve
-		PRIMARY KEY(id_eleve)
+		PRIMARY KEY(Id),
+	CONSTRAINT fk_promotion_eleve
+		FOREIGN KEY (Promotion_id)
+		REFERENCES Promotion(Id)
 );
 
 CREATE TABLE Formateur (
-	id_formateur		INTEGER NOT NULL IDENTITY(1,1),
-	nom_formateur		VARCHAR(20) NOT NULL,
-	prenom_formateur	VARCHAR(20) NOT NULL,
-	mail_formateur		VARCHAR(50) NOT NULL UNIQUE,
-	telephone_formateur	VARCHAR(16),
+	Id INTEGER NOT NULL IDENTITY(1,1),
+	Nom VARCHAR(20) NOT NULL,
+	Prenom VARCHAR(20) NOT NULL,
+	Mail VARCHAR(50) NOT NULL UNIQUE,
+	Telephone VARCHAR(16),
 	CONSTRAINT pk_formateur
-		PRIMARY KEY(id_formateur)
+		PRIMARY KEY(Id)
 );
 
 CREATE TABLE Matiere (
-	id_matiere			INTEGER NOT NULL IDENTITY(1,1),
-	nom_matiere			VARCHAR(100) NOT NULL UNIQUE, -- primaty key (a valider par le client)
+	Id INTEGER NOT NULL IDENTITY(1,1),
+	Nom	VARCHAR(100) NOT NULL UNIQUE, -- primaty key (a valider par le client)
 	CONSTRAINT pk_matiere
-		PRIMARY KEY(id_matiere)
+		PRIMARY KEY(Id)
 );
 
 CREATE TABLE Salle (
-	id_salle		INTEGER NOT NULL IDENTITY(1,1),
-	nom_salle		VARCHAR(20) NOT NULL UNIQUE, -- primaty key (a valider par le client)
-	capacite_salle	INTEGER NOT NULL,
+	Id INTEGER NOT NULL IDENTITY(1,1),
+	Nom	VARCHAR(20) NOT NULL UNIQUE, -- primaty key (a valider par le client)
+	Capacite INTEGER NOT NULL,
 	CONSTRAINT pk_salle
-		PRIMARY KEY(id_salle)
+		PRIMARY KEY(Id)
 );
 
 CREATE TABLE Session_edt (
-	id_session			INTEGER NOT NULL IDENTITY(1,1),
-	id_promotion		INTEGER NOT NULL,
-	id_formateur		INTEGER NOT NULL,
-	id_matiere			INTEGER NOT NULL,
-	id_salle			INTEGER NOT NULL,
-	dateDebut_session	DATETIME NOT NULL,
-	dateFin_session		DATETIME NOT NULL,
-	CONSTRAINT fk_promotion_session
-		FOREIGN KEY (id_promotion)
-		REFERENCES Promotion(id_promotion),
-	CONSTRAINT fk_salle_session
-		FOREIGN KEY (id_salle)
-		REFERENCES Salle(id_salle),
-	CONSTRAINT fk_formateur_session
-		FOREIGN KEY (id_formateur)
-		REFERENCES Formateur(id_formateur),
-	CONSTRAINT fk_matiere_session
-		FOREIGN KEY (id_matiere)
-		REFERENCES Matiere(id_matiere),
+	Id INTEGER NOT NULL IDENTITY(1,1),
+	Promotion_id INTEGER NOT NULL,
+	Formateur_id INTEGER NOT NULL,
+	Matiere_id INTEGER NOT NULL,
+	Salle_id INTEGER NOT NULL,
+	DateDebut DATETIME NOT NULL,
+	DateFin DATETIME NOT NULL,
 	CONSTRAINT pk_session
-		PRIMARY KEY(id_session)
+		PRIMARY KEY(Id),
+	CONSTRAINT fk_promotion_session
+		FOREIGN KEY (Promotion_id)
+		REFERENCES Promotion(Id),
+	CONSTRAINT fk_salle_session
+		FOREIGN KEY (Salle_id)
+		REFERENCES Salle(Id),
+	CONSTRAINT fk_formateur_session
+		FOREIGN KEY (Formateur_id)
+		REFERENCES Formateur(Id),
+	CONSTRAINT fk_matiere_session
+		FOREIGN KEY (Matiere_id)
+		REFERENCES Matiere(Id)
 );
 
 CREATE TABLE Formation_matiere (
-	id_formation INTEGER NOT NULL,
-	id_matiere INTEGER NOT NULL,
+	Formation_id INTEGER NOT NULL,
+	Matiere_id INTEGER NOT NULL,
 	CONSTRAINT pk_formation_matiere
-		PRIMARY KEY (id_formation, id_matiere),
+		PRIMARY KEY (Formation_id, Matiere_id),
 	CONSTRAINT fk_formation_FormationMatiere
-		FOREIGN KEY (id_formation)
-		REFERENCES Formation(id_formation),
+		FOREIGN KEY (Formation_id)
+		REFERENCES Formation(Id),
 	CONSTRAINT fk_matiere_FormationMatiere
-		FOREIGN KEY (id_matiere)
-		REFERENCES Matiere(id_matiere)
+		FOREIGN KEY (Matiere_id)
+		REFERENCES Matiere(Id)
 );
 
 CREATE TABLE Formateur_matiere (
-	id_formateur INTEGER NOT NULL,
-	id_matiere INTEGER NOT NULL,
+	Formateur_id INTEGER NOT NULL,
+	Matiere_id INTEGER NOT NULL,
 	CONSTRAINT pk_formateur_matiere
-		PRIMARY KEY (id_formateur, id_matiere),
+		PRIMARY KEY (Formateur_id, Matiere_id),
 	CONSTRAINT fk_formateur_FormateurMatiere
-		FOREIGN KEY (id_formateur)
-		REFERENCES Formateur(id_formateur),
+		FOREIGN KEY (Formateur_id)
+		REFERENCES Formateur(Id),
 	CONSTRAINT fk_matiere_FormateurMatiere
-		FOREIGN KEY (id_matiere)
-		REFERENCES Matiere(id_matiere)
+		FOREIGN KEY (Matiere_id)
+		REFERENCES Matiere(Id)
 );
 
 CREATE TABLE Absence (
-	id_eleve INTEGER NOT NULL,
-	id_session INTEGER NOT NULL,
+	Eleve_id INTEGER NOT NULL,
+	Session_id INTEGER NOT NULL,
 	CONSTRAINT pk_absence
-		PRIMARY KEY (id_eleve, id_session),
+		PRIMARY KEY (Eleve_id, Session_id),
 	CONSTRAINT fk_eleve_absence
-		FOREIGN KEY (id_eleve)
-		REFERENCES Eleve(id_eleve),
+		FOREIGN KEY (Eleve_id)
+		REFERENCES Eleve(Id),
 	CONSTRAINT fk_session_absence
-		FOREIGN KEY (id_session)
-		REFERENCES Session_edt(id_session)
+		FOREIGN KEY (Session_id)
+		REFERENCES Session_edt(Id)
 );
